@@ -48,4 +48,3 @@ Some ideas to expand this project:
 
 ---
 
-## 📂 Repository Structure
