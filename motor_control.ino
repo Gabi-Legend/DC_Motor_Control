@@ -18,35 +18,37 @@ void setup() {
   pinMode(in4, OUTPUT);
 }
 
-void motor1Forward() {
+void forward() {
   digitalWrite(in1, HIGH);
   digitalWrite(in2, LOW);
-  analogWrite(enA, 200);
-}
 
-void motor2Forward() {
   digitalWrite(in3, HIGH);
   digitalWrite(in4, LOW);
-  analogWrite(enB, 200);
 }
 
-void stopMotors() {
-  analogWrite(enA, 0);
-  analogWrite(enB, 0);
+void accelerate() {
+  for (int v = 0; v <= 255; v += 5) {
+    analogWrite(enA, v);
+    analogWrite(enB, v);
+    delay(40);
+  }
+}
+
+void brake() {
+  for (int v = 255; v >= 0; v -= 5) {
+    analogWrite(enA, v);
+    analogWrite(enB, v);
+    delay(40);
+  }
 }
 
 void loop() {
 
-  motor1Forward();
-  delay(2000);
+  forward();
 
-  motor2Forward();
-  delay(2000);
+  accelerate();   
+  delay(2000);   
 
-  motor1Forward();
-  motor2Forward();
-  delay(3000);
-
-  stopMotors();
+  brake();       
   delay(2000);
 }
